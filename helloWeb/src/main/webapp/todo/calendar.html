@@ -6,44 +6,7 @@
 </head>
 <body>
 	<div id="show"></div>
-	<table border="1">
-		<thead>
-
-		</thead>
-		<tbody>
-			
-		</tbody>
-	</table>
-	<script>
-		//calendar => table
-		//makeHead()
-		function makeHead() {
-			
-			const day = ['일', '월', '화', '수', '목', '금', '토'];
-			let dayStr = ''; 
-			dayStr += "<table border = '1'>";
-			dayStr += "<thead>";
-			dayStr += "<tr>";
-			
-			day.forEach(obj => {dayStr += "<th>" + obj + "</th>"});
-			dayStr += "</tr></thead>";
-			return dayStr;
-			console.log(dayStr);
-			document.getElementById('show').innerHTML += dayStr;
-		}
-		//makeBody()
-		function makeBody() {
-			let num = 0;
-			for(let i=1; i<=31; i++) {
-				
-			}
-		}
-		console.log(makeBody());
-		//makeCalendar()
-		function makeCalendar() {
-		}
-		//위 두 함수 조합하여 적절하게 써서
-		//makeCalendar();
+	<script src="cal.js">
 	</script>
 
 </body>
