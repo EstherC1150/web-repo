@@ -11,9 +11,6 @@ function Member(name, age, height) {
 }
 //makeTr 함수
 function makeTr(member) {
-    if(member.str == null) {
-        alert("값을 입력하세요");
-    }else {
     let str = "";
     str += '<tr>'
     str += '<td>' + member.name + '</td>';
@@ -23,7 +20,6 @@ function makeTr(member) {
     str += '<td><button onclick="this.parentElement.parentElement.remove()">삭제</button></td>';
     str += '</tr>';
     return str;
-    }
 }
 //onclick은 아무곳에나 갖다붙여도 된다
 document.getElementById('saveBtn').onclick = function(e) { //이벤트가 실행되면 대응되는 함수 : 이벤트 핸들러 --> 따라서 이벤트 변수 e를 꼭 받게 되어있다
@@ -31,6 +27,12 @@ document.getElementById('saveBtn').onclick = function(e) { //이벤트가 실행
     let name = document.getElementById('name').value;
     let age = document.getElementById('age').value;
     let height = document.getElementById('height').value;
+	
+	//값이 없을 때 경고창
+	if(!name || !age || !height) {
+		alert('값을 입력하세요');
+		return; //함수종료
+	}
 
     const mem = new Member(name,age,height);
     let str = makeTr(mem); //<tr>...</tr>
