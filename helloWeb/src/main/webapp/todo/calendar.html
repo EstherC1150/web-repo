@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>calendar</title>
+</head>
+<body>
+	<div id="show"></div>
+	<table border="1">
+		<thead>
+
+		</thead>
+		<tbody>
+			
+		</tbody>
+	</table>
+	<script>
+		//calendar => table
+		//makeHead()
+		function makeHead() {
+			
+			let day = ['일', '월', '화', '수', '목', '금', '토'];
+			let days = "";
+			for(let val of day) {
+				return days += day;
+			}
+			let str = "";
+			str += '<table border = "1">';
+			str += '<tr>' + days + '</tr>';
+			str += '</table>';
+			return str;
+		}
+		console.log(makeHead());
+		//makeBody()
+		function makeBody() {
+			let no = 0;
+			for(let i = 1; i < 32; i++) {
+				return no = i;
+			}
+		}
+		console.log(makeBody());
+		//makeCalendar()
+		function makeCalendar() {
+		}
+		//위 두 함수 조합하여 적절하게 써서
+		//makeCalendar();
+	</script>
+
+</body>
+</html>
