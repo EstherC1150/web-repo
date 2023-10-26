@@ -14,9 +14,9 @@
 		//function makeBody() {
 			dayStr += "<tbody><tr>";
 			for(let i=1; i<32; i++) {
-				dayStr += '<td>' + i + '</td>'
+				dayStr += '<td align="center">' + i + '</td>'
 				if(i % 7 == 0) {
-					dayStr += '<br><tr>'
+					dayStr += '</tr><tr>'
 				}
 			}
 			dayStr += '</tr></tbody></table>';
