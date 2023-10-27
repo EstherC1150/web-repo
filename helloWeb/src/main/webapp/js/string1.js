@@ -42,7 +42,12 @@ console.log(strCopy);
 
 //toString(), indexOf(), lastIndexOf(), charAt(), includes()
 //--> toString() : 문자열을 반환
+
 //--> indexOf() : 배열에서 주어진 요소를 찾을 수 있는 첫 번째 인덱스를 반환, 찾을 수 없는 경우 -1을 반환
+// Start from index 2
+console.log(beasts.indexOf('bison', 2));
+// Expected output: 4
+
 //--> lastIndexOf() : 역순으로 탐색하여, 최초로 마주치는 인덱스를 반환
 //--> charAt() : 문자열에서 특정 인덱스에 위치하는 유니코드 단일문자를 반환
 const sentence = 'The quick brown fox jumps over the lazy dog.';
