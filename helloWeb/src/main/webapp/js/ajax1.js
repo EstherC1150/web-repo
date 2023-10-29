@@ -55,9 +55,8 @@ function loadJson() {
 	console.log(xhtp.responseJSON);
 	let result = JSON.parse(xhtp.responseText); //json문자열 => 오브젝트 타입으로 변환
 	console.log(result);
-
-	
-	
+	let tableT = ["회원아이디", "비밀번호", "이름", "연락처"];
+	document.getElementById('show').innerHTML += table.makeTable(tableT,result);
 }
 
 function loadXML() { //onload : 이벤트

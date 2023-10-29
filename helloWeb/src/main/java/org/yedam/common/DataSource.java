@@ -9,7 +9,7 @@ public class DataSource {
 		private DataSource() {} //나를 생성하지 못하도록 나의 생성자를 내가 만들어버린다
 		
 		private static String driver = "oracle.jdbc.driver.OracleDriver";
-		private static String url = "jdbc:oracle:thin:@localhost:1521:xe"; //현업에 가면 @ 뒤로 다르다.
+		private static String url = "jdbc:oracle:thin:@localhost:1521:orcl"; //현업에 가면 @ 뒤로 다르다.
 		private static String user = "hr";
 		private static String password ="1234";
 		
