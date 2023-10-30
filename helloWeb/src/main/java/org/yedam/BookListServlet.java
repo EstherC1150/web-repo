@@ -10,21 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.yedam.service.MemberService;
-import org.yedam.service.MemberVO;
-import org.yedam.service.serviceImpl.MemberServiceImpl;
+import org.yedam.service.BookService;
+import org.yedam.service.BookVO;
+import org.yedam.service.serviceImpl.BookServiceImpl;
 
 /**
- * Servlet implementation class MemberListServ
+ * Servlet implementation class BookListServlet
  */
-@WebServlet("/MemberListServ2")
-public class MemberListServ2 extends HttpServlet {
+@WebServlet("/BookListServlet")
+public class BookListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServ2() {
+    public BookListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,23 +33,22 @@ public class MemberListServ2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		MemberService svc = new MemberServiceImpl();
-		List<MemberVO> list = svc.memberList();
-		System.out.println("JSON 입니다");
+		response.setContentType("text/json;charset=utf-8");
 		
-		response.setContentType("text/json;charset=utf-8"); //한글처리 
+		BookService svc = new BookServiceImpl();
+		List<BookVO> list = svc.bookList();
 		
 		PrintWriter out = response.getWriter();
-		// [{"mid" : value, "pass" : value, "name" : valud, "phone" : value}]
+		
 		String str = "[";
 		int cnt = 0;
-		for(MemberVO vo : list) { //json 형태의 배열 만들어줌
+		for(BookVO vo : list) {
 			str += "{";
-			str += "\"mid\":\"" + vo.getMid() + "\",";
-			str += "\"pass\":\"" + vo.getPass() + "\",";
-			str += "\"name\":\"" + vo.getName() + "\",";
-			str += "\"phone\":\"" + vo.getPhone() + "\"";
+			str += "\"bookId\":\"" + vo.getBookId() + "\",";
+			str += "\"bookName\":\"" + vo.getBookName() + "\",";
+			str += "\"bookWriter\":\"" + vo.getBookWriter() + "\",";
+			str += "\"bookMake\":\"" + vo.getBookMake() + "\"";
+			str += "\"bookPrice\":\"" + vo.getBookPrice() + "\"";
 			str += "}";
 			if(++cnt != list.size()) { //마지막이라는 의미
 				str += ",";

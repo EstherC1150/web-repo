@@ -55,8 +55,16 @@ function loadJson() {
 	console.log(xhtp.responseJSON);
 	let result = JSON.parse(xhtp.responseText); //json문자열 => 오브젝트 타입으로 변환
 	console.log(result);
-	let tableT = ["회원아이디", "비밀번호", "이름", "연락처"];
-	document.getElementById('show').innerHTML += table.makeTable(tableT,result);
+	let titles = ["회원아이디", "비밀번호", "이름", "연락처"];
+	
+	//let dataAry = [];
+	//result.forEach(member => {
+	//	dataAry.push({
+	//		mid: member.mid, pass: member.pass, name: member.name, phone: member.phone
+	//	})
+	//})
+	
+	document.getElementById('show').innerHTML += table.makeTable(titles,result);
 }
 
 function loadXML() { //onload : 이벤트
@@ -90,3 +98,4 @@ function loadXML() { //onload : 이벤트
 			'</td><td>' + newMember.phone + '</td></tr>';
 	document.getElementById('list').innerHTML += tr;
 }
+

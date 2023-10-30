@@ -2,7 +2,8 @@ package org.yedam;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,17 +15,20 @@ import org.yedam.service.MemberService;
 import org.yedam.service.MemberVO;
 import org.yedam.service.serviceImpl.MemberServiceImpl;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 /**
- * Servlet implementation class MemberListServ
+ * Servlet implementation class ModMemberServ
  */
-@WebServlet("/MemberListServ2")
-public class MemberListServ2 extends HttpServlet {
+@WebServlet("/ModMemberServ.html")
+public class ModMemberServ extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServ2() {
+    public ModMemberServ() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,30 +37,36 @@ public class MemberListServ2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/json; charset=UTF-8");
 		// TODO Auto-generated method stub
-		MemberService svc = new MemberServiceImpl();
-		List<MemberVO> list = svc.memberList();
-		System.out.println("JSON 입니다");
-		
-		response.setContentType("text/json;charset=utf-8"); //한글처리 
+		//수정처리하는 서블릿
+		String mid = request.getParameter("mid");
+		String pass = request.getParameter("pass");
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		//mid, pass, name, phone => db update 처리
+		MemberVO vo2 = new MemberVO(mid, pass, name, phone);
+		MemberService svc2 = new MemberServiceImpl();
 		
 		PrintWriter out = response.getWriter();
-		// [{"mid" : value, "pass" : value, "name" : valud, "phone" : value}]
-		String str = "[";
-		int cnt = 0;
-		for(MemberVO vo : list) { //json 형태의 배열 만들어줌
-			str += "{";
-			str += "\"mid\":\"" + vo.getMid() + "\",";
-			str += "\"pass\":\"" + vo.getPass() + "\",";
-			str += "\"name\":\"" + vo.getName() + "\",";
-			str += "\"phone\":\"" + vo.getPhone() + "\"";
-			str += "}";
-			if(++cnt != list.size()) { //마지막이라는 의미
-				str += ",";
-			}
+		Gson gson = new GsonBuilder().create();
+		
+		Map<String, Object> map = new HashMap<>();
+
+		
+		if (svc2.modifyMember(vo2)) {
+			//{"retCode" : "OK"}
+			map.put("retCode", "OK");
+			map.put("vo", vo2);
+		} else {
+			map.put("retCode", "NG");
+			map.put("vo", vo2.getMid());
 		}
-		str += "]";
-		out.print(str);
+		String json = gson.toJson(map);
+		out.print(json);
+		
+		
 	}
 
 	/**

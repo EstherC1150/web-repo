@@ -12,20 +12,24 @@ const table = {
 	makeBody(dataAry = [{mid, pass, name, phone}]) {
 		let bodyTag = "<tbody id = 'list'>";
 		dataAry.forEach(item => {
-			bodyTag += "<tr>";
-			for(let prop in item) {
-				bodyTag += "<td>" + item[prop] + "</td>";
-			}
-			bodyTag += "</tr>";
+			bodyTag += this.makeTr(item); //입력값과 테이블값 tr이 달라서 그냥 이렇게 간단히 -> 어짜피 makeTr함수 실행
 		})
 		bodyTag += "</tbody>";
 		return bodyTag;
 	},
 	makeTable(titleAry, dataAry) {
-		let tableTag = "<table border = '1'>";
+		let tableTag = "<table border = '1'>"; //이벤트 핸들러
 		tableTag += this.makeHead(titleAry) + this.makeBody(dataAry);
 		tableTag += "</table>";
 		return tableTag;
+	},
+	makeTr(member = {}) { //tr 만들기
+		let tr = "<tr onclick='showInfo(event,this)'>";
+		for(let prop in member) {
+			tr += "<td>" + member[prop] + "</td>";
+		}
+		tr += "</tr>";
+		return tr;
 	}
 }
 
