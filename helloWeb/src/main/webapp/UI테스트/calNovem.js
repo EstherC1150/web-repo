@@ -10,10 +10,15 @@ const calNovem = {
 	},
 	makeBody() {
 		let tbody = '</tr></thead><tbody><tr>';
-		for(let i=1; i<31; i++) {
-				tbody += '<td align="center">' + i + '</td>'
-			if(i % 7 == 0) {
-				tbody += '</tr><tr>'
+		tbody += '<td></td><td></td><td></td>'
+		for(let i=1; i<5; i++) {
+				tbody += '<td align="center">' + i + '</td>';
+		}
+		tbody += '<tr></tr>';
+		for(let i=5; i<=30; i++) {
+			tbody += '<td align="center">' + i + '</td>';
+			if(i % 7 == 4) {
+				tbody += '<tr></tr>';
 			}
 		}
 		tbody += '</tr></tbody></table>';
@@ -27,4 +32,3 @@ const calNovem = {
 	}
 }
 calNovem.novemberCal();
-
