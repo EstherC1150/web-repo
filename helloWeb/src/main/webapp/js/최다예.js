@@ -4,7 +4,7 @@ import table from './domTable.js';
 
 
 let url = 'https://api.odcloud.kr/api/15077586/v1/centers?page=1&perPage=284&serviceKey=WP0mIf%2BR4VR0nuDoUbCZ763Nxm7k7kYjBtMkj4XDjgzEh0b%2FOFSYBgt6KNdVWK0aJKIoJVyXj0B9x28vGY78Tg%3D%3D';
-let titles = ['센터id', '센터명', '시도', '연락처', '주소'];
+let titles = ['센터id', '센터명', '의료원', '연락처'];
 
 
 fetch(url)
@@ -40,81 +40,21 @@ function fetchCallback(result) {
 	}
 
 	//let filterAry = rawData.filter(center => center.sido =='대전광역시'); //해당 지역의 것을 가지고 온다 초기데이터 화면으로
-	//let filterAry = rawData.filter((center, idx) => idx < 10); //10개만 가져오기
-	//genTable(filterAry);
-	genTable(rawData, 1); //초기데이터로 화면 출력 : 처음에 너무 많이 뿌려주지말고
+	let filterAry = rawData.filter((center, idx) => idx < 10); //10개만 가져오기
+	genTable(filterAry);
+	//genTable(rawData); //초기데이터로 화면 출력 : 처음에 너무 많이 뿌려주지말고
 }
 
 //전체 출력	
-function genTable(rawData = [], page = 21) {
+function genTable(rawData = [], page = 1) {
 	//전체 rawData로 출력
 
 	//초기화
 	//document.getElementById('show') : 'show'
 	document.querySelector('#show').innerHTML = '';
 
-	//첫번째, 마지막 => 계산
-	let startNo = (page - 1) * 5; //0부터해서~
-	let endNo = page * 5;
-
-	//첫번째, 마지막 페이지 => 계산
-	let totalCnt = rawData.length;
-	let lastPage = Math.ceil(totalCnt / 5);
-	let endPage = Math.ceil(page / 5) * 5;
-	let beginPage = endPage - 4;
-	let prevPage = false, nextPage = false;
-	
-	if (beginPage > 1) {
-		prevPage = true;
-	}
-	if (endPage < lastPage) {
-		nextPage = true;
-	}
-	if (endPage > lastPage) {
-		endPage = lastPage;
-	}
-	document.querySelector('.pagination').innerHTML = '';
-
-	//이전페이지 여부
-	if (prevPage) {
-		let aTag = document.createElement('a');
-		aTag.setAttribute('href', '#');
-		aTag.innerHTML = '&laquo;';
-		aTag.addEventListener('click', function(e) {
-			genTable(rawData, beginPage - 1);
-		})
-		document.querySelector('.pagination').append(aTag);
-	}
-
-
-
-	//전체페이지
-	for (let i = beginPage; i <= endPage; i++) {
-		let aTag = document.createElement('a');
-		aTag.setAttribute('href', '#');
-		aTag.innerHTML = i;
-		if (i == page) {
-			aTag.setAttribute('class', 'active');
-		}
-		aTag.addEventListener('click', function(e) {
-			genTable(rawData, i);
-		})
-		document.querySelector('.pagination').append(aTag);
-	}
-
-	if (nextPage) {
-		let aTag = document.createElement('a');
-		aTag.setAttribute('href', '#');
-		aTag.innerHTML = '&raquo;';
-		aTag.addEventListener('click', function(e) {
-			genTable(rawData, endPage + 1);
-		})
-		document.querySelector('.pagination').append(aTag);
-	}
-	//전체 rawData로 출력
 	let thead = table.makeHead(titles); //헤더정보
-
-	//let mapData = rawData.map(center => { //매핑정보 출력 --> map으로
+	//let mapData = rawData.map(center => { //매핑정보 출력
 	//	let newCenter = {
 	//		id: center.id,
 	//		centerName: center.centerName.replace('코로나19', ''),
@@ -125,23 +65,18 @@ function genTable(rawData = [], page = 21) {
 	//	}
 	//	return newCenter;
 	//});
-
-	let reduceData = rawData.reduce((acc, center, idx) => { //reduce사용하기
-		if (idx >= startNo && idx < endNo) {
-			let newCenter = {
-				id: center.id,
-				centerName: center.centerName.replace('코로나19', ''),
-				sido: center.sido,
-				phoneNumber: center.phoneNumber,
-				address: center.address,
-				lat: center.lat,
-				lng: center.lng
-			}
-			acc.push(newCenter); //새로 생성된 newCenter를 배열에 담는다
+	let reduceData = rawData.reduce((acc, center) => { //reduce사용하기
+		let newCenter = {
+			id: center.id,
+			centerName: center.centerName.replace('코로나19', ''),
+			org: center.org,
+			phoneNumber: center.phoneNumber,
+			lat: center.lat,
+			lng: center.lng
 		}
-		return acc; //추가된 배열을 반환해서 다음순번의 처리에 acc로 사용
+		acc.push(newCenter);
+		return acc;
 	}, []);
-
 	console.log(reduceData);
 	let tbody = table.makeBody(reduceData); //[{}, {}, {} ...{}]
 	let tbl = document.createElement('table');
