@@ -64,13 +64,23 @@ function genTable(rawData = [], page = 21) {
 	let beginPage = endPage - 4;
 	let prevPage = false, nextPage = false;
 	
+	if(page > 3) {
+		beginPage = page - 2;
+	}else {
+		beginPage = 1;
+	}
+	endPage = beginPage + 4;
+	
+	if(beginPage>1) {
+		nextPage = true;
+	}
+	if(endPage < lastPage) {
+		nextPage = true;
+	}
 	if (beginPage > 1) {
 		prevPage = true;
 	}
-	if (endPage < lastPage) {
-		nextPage = true;
-	}
-	if (endPage > lastPage) {
+	if(endPage > lastPage) {
 		endPage = lastPage;
 	}
 	document.querySelector('.pagination').innerHTML = '';

@@ -39,7 +39,6 @@ public class ModMemberServ extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/json; charset=UTF-8");
-		// TODO Auto-generated method stub
 		//수정처리하는 서블릿
 		String mid = request.getParameter("mid");
 		String pass = request.getParameter("pass");
