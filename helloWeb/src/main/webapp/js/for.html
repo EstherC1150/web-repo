@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>webapp/js/for.html</title>
+<script>
+    console.log("javascript start...");
+    //5번 반복
+    for(let i=0; i<5; i++) {
+        console.log(i);
+    }
+
+    //배열과 for 활용
+    let numary = [1, 2, 3, 4, 5]; //배열객체
+    console.log(typeof numary);
+
+    //var 변수 : 전역 or 지역(함수안에서 선언)
+    let sum = 0;
+    for(let i=0; i<numary.length; i++) { //let, const : 블럭단위의 변수지정
+        //var i = 0으로 하면 for문이 끝나고도 콘솔로 i를 출력 가능
+        sum += numary[i];
+    }
+    console.log(sum);
+    
+    //확장 for..of..
+    sum = 0; //초기화
+    for(let val of numary) {
+        sum += val;    
+    }
+    console.log(`for of --> sum값: ${sum}`);
+
+    //배열. forEach(함수) : 함수가 매개값
+    //https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+    sum = 0; //초기화
+    let num = 0;
+    numary.forEach(function(item,idx,ary) {
+        //console.log("hahahahahahah"); //5번 출력된 걸 console창에서 볼 수 있음
+        //console.log(item,',',idx,',',ary); //콤마로 출력하는 이유 +로 해버리면 객체 타입을 제대로 볼 수 없음
+        if(item % 2 == 0) { //짝수만 더하기
+            sum += item;
+        }
+        if(idx < 4) { //1, 2, 3번째
+            num += idx;
+        }
+    })
+    console.log(`sum의 값: ${sum}`);
+    console.log(`num의 값: ${num}`);
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</head>
+<body>
+</body>
+</html>

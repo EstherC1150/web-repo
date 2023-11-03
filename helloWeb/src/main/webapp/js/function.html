@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>webapp/js/funtion.html</title>
+    <!-- ctrl + shift + f : 정렬기능 -->
+    <style>
+        #saveBtn {
+            background-color: rgb(219, 255, 147);
+        }
+
+    </style>
+</head>
+
+<body>
+    <table border = "1">
+        <tr>
+            <th>이름</th>
+            <td><input type="text" id="name" value="홍길동"></td>
+        </tr>
+        <tr>
+            <th>나이</th>
+            <td><input type="number" id="age" value="20"></td>
+        </tr>
+        <tr>
+            <th>키</th>
+            <td><input type="text" id="height" value="175.7"></td>
+        </tr>
+        <tr>
+            <td>
+                <button id="saveBtn">저장</button>
+            </td>
+        </tr>
+    </table>
+
+    <h3>회원 목록</h3>
+    <div id="show">
+        <!-- div#show라고 치고 엔터 자동 div생성 -->
+        <!-- 단축키 생성 table>(thead>tr>tr*2), (tbody>tr>td*2) +는 형제 관계 -->
+        <table border = "1">
+            <thead>
+                <tr>
+                    <th>이름</th>
+                    <th>나이</th>
+                    <th>키</th>
+                    <th>소개</th>
+                    <th>del</th>
+                </tr>
+            </thead>
+            <tbody id = "list">
+
+            </tbody>
+        </table>
+    </div>
+
+
+    <script src = "function5.js"></script>
+
+</body>
+
+</html>
